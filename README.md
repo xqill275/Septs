@@ -2,7 +2,7 @@
  This python script aims to automate aspects of pentesting
 
 # how to run
-python septs.py <host>
+python septs.py < host >
 
 
 # Version history
