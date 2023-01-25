@@ -20,7 +20,7 @@ logo = r"""
      '    '         '    )/       '               '                 '    '      
                          '                                                      
 
-Super Easy Pentest Script Version 1.0
+Super Easy Pentest Script || Version 1.0
 """
 
 if sys.argv[1] == "-h":

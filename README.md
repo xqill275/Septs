@@ -1,7 +1,13 @@
 # Septs
  This python script aims to automate aspects of pentesting
 
- # Version history
+# how to run
+"""
+python septs.py <host>
+"""
+
+
+# Version history
 
  Version 1.0:
 
