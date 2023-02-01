@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Super Easy Pentest Script</title>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        <div class="Header">
+            <h1>Super Easy Pentest Script</h1>
+        </div>
+        <div class="Content">
+            <p>Downloading the script...</p>
+
+            <script>
+                var download = function() {
+                    var element = document.createElement('a');
+                    element.setAttribute('href', 'septs.zip');
+                    element.setAttribute('download', 'septs.zip');
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+                    element.click();
+                    document.body.removeChild(element);
+                }
+                download();
+            </script>
+        </div>
+    </body>

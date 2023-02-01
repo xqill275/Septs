@@ -20,13 +20,21 @@ logo = r"""
      '    '         '    )/       '               '                 '    '      
                          '                                                      
 
-Super Easy Pentest Script || Version 1.0
+Super Easy Pentest Script || Version 1.01
 """
 
 if sys.argv[1] == "-h":
-    print("Usage: septs.py <host>")
+    print("Usage: python septs.py <host>")
+    print("Options:")
+    print("-h: show this help menu")
+    print("-v: show version")
     sys.exit(0)
-
+elif sys.argv[1] == "-v":
+    print("Version 1.01")
+    sys.exit(0)
+elif sys.argv[1] == None:
+    print("Usage: python septs.py <host>")
+    sys.exit(0)
 host = sys.argv[1]
 
 def nmap():
@@ -49,7 +57,6 @@ def parse():
                 ports.append(line.split("/")[0])
     f.close()
     search_for_services(None,None)
-
 
 def search_for_services(http_done, samba_done):
     # check is the services list is empty
@@ -117,6 +124,14 @@ def check_tools():
         print("[*] Enum4linux can be installed with: apt install enum4linux")
         print("[*] Exiting...")
         sys.exit(0)
+    if os.path.isfile("/usr/bin/hydra"):
+        print("[*] Hydra found")
+    else:
+        print("[*] Hydra not found")
+        print("[*] Hydra can be installed with: apt install hydra")
+        print("[*] Exiting...")
+        sys.exit(0)
+    print("[*] All tools found")
     nmap()
 
 def http():
@@ -138,7 +153,31 @@ def gobuster_parser():
                 print("[*] Found directory: " + line.split(" ")[0])
                 found_directory.append(line.split(" ")[0])
     f.close()
-    return  
+    return
+
+def search_directory(found_directory):
+    print("[*] checking for intresting things ... ")
+    for x in found_directory:
+        os.system("curl " + host + x + " > " + x + ".txt")
+        with open(x + ".txt", "r") as f:
+            if "login" in f:
+                print("[*] Found login page: " + x)
+                brute_force_login(x)
+
+def brute_force_login(x):
+   print("[*] would you like to do a dictionary attack? or a brute force attack?")
+   print("[*] 1. Dictionary attack")
+   print("[*] 2. Brute force attack")
+   what_to_do = input("[*] Enter your choice: ")
+   if what_to_do == "1":
+        print("[*] todo")
+   elif what_to_do == "2":
+        print("[*]todo")
+   else:
+        os.system("clear")
+        print("[*] Invalid choice")
+        brute_force_login(x)
+
 
 def check_wordlist_exists():
     notFound = False
@@ -151,6 +190,8 @@ def check_wordlist_exists():
         os.system("wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt > /dev/null")
         notFound = True
 
+
+
 def main():
     print(logo)
     print("-----------------------------")
@@ -158,4 +199,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 
